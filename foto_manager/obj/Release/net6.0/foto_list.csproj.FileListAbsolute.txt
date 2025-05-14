@@ -1,0 +1,15 @@
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\bin\Release\net6.0\foto_list.exe
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\bin\Release\net6.0\foto_list.deps.json
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\bin\Release\net6.0\foto_list.runtimeconfig.json
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\bin\Release\net6.0\foto_list.dll
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\bin\Release\net6.0\foto_list.pdb
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.GeneratedMSBuildEditorConfig.editorconfig
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.AssemblyInfoInputs.cache
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.AssemblyInfo.cs
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.csproj.CoreCompileInputs.cache
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.sourcelink.json
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.dll
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\refint\foto_list.dll
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.pdb
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\foto_list.genruntimeconfig.cache
+C:\Doc\projects\ManageYourPhotosRepo\foto_list\obj\Release\net6.0\ref\foto_list.dll
