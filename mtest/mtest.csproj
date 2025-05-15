@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\foto_list\foto_manager.csproj" />
+    <ProjectReference Include="..\foto_manager\foto_manager.csproj" />
   </ItemGroup>
 
 </Project>
