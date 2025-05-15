@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("foto_manager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0f9e9692883098be5ee6558a33c96ac027edcfb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ca8d66dd78ea489d30e9323ddec5908b40a8b01")]
 [assembly: System.Reflection.AssemblyProductAttribute("foto_manager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("foto_manager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
