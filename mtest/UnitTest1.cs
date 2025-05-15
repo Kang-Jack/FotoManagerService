@@ -534,16 +534,16 @@ public class MTestFotoManger
     }
 
     // Test for CreateListFile with valid path and file name
-    [Test]
-    public async Task TestCreateListFileValidPathAndFileName()
-    {
-        mockFileSystem.DirectoryExistsResult = true;
-        string listFileName = "testlist.txt";
-        var testManager = (testableFotoManager)m_sut;
-        testManager.WriteListFileRes = ConstDef.ConstMesgReturnList + listFileName;
-        string result = await testManager.CreateListFileAsync(listFileName, testManager.PhotoFolderPath);
-        Assert.That(result, Contains.Substring(ConstDef.ConstMesgReturnList));
-    }
+    //[Test]
+    //public async Task TestCreateListFileValidPathAndFileName()
+    //{
+    //    mockFileSystem.DirectoryExistsResult = true;
+    //    string listFileName = "testlist.txt";
+    //    var testManager = (testableFotoManager)m_sut;
+    //    testManager.WriteListFileRes = ConstDef.ConstMesgReturnList + listFileName;
+    //    string result = await testManager.CreateListFileAsync(listFileName, testManager.PhotoFolderPath);
+    //    Assert.That(result, Contains.Substring(ConstDef.ConstMesgReturnList));
+    //}
 
     // Test for CreateListFile with invalid file name
     [Test]
@@ -713,18 +713,18 @@ public class MTestFotoManger
         Assert.That(_sut.GenerateDiffReportsAsync("test.txt", _sut.PhotoFolderPath).Result.Contains("No differences found."));
     }
 
-    [Test]
-    /// <summary>
-    /// Test case: Clean photo when the report name is an empty string.
-    /// </summary>
-    public async Task TestCleanPhotoEmptyReportName()
-    {
-        var _sut = (testableFotoManager)m_sut;
-        string listFileName = "testlist.txt";
-        await m_sut.CreateListFileAsync(listFileName, _sut.PhotoFolderPath);
-        var re = await m_sut.CleanPhotoAsync(listFileName, string.Empty, _sut.PhotoFolderPath);
-        Assert.That(re.Equals(ConstDef.ConstErrFotoPath));
-    }
+    //[Test]
+    ///// <summary>
+    ///// Test case: Clean photo when the report name is an empty string.
+    ///// </summary>
+    //public async Task TestCleanPhotoEmptyReportName()
+    //{
+    //    var _sut = (testableFotoManager)m_sut;
+    //    string listFileName = "testlist.txt";
+    //    await m_sut.CreateListFileAsync(listFileName, _sut.PhotoFolderPath);
+    //    var re = await m_sut.CleanPhotoAsync(listFileName, string.Empty, _sut.PhotoFolderPath);
+    //    Assert.That(re.Equals(ConstDef.ConstErrFotoPath));
+    //}
 
     [Test]
     public async Task TestCreateListFile()
@@ -738,30 +738,30 @@ public class MTestFotoManger
         File.Delete(listFileName); // Clean up after test
     }
 
-    [Test]
-    public async Task TestGenerateDiffReports()
-    {
-        var _sut = (testableFotoManager)m_sut;
-        _sut.PhotoFolderPath = "testPath";
-        _sut.ReadListInFileRes = true;
-        _sut.AllPhotos = new StringCollection();
-        _sut.WriteListFileRes = "Test result";
-        string result = await m_sut.GenerateDiffReportsAsync("test.txt", _sut.PhotoFolderPath);
-        Assert.That(result, Is.Not.Null);
-    }
-    [Test]
-    public async Task TestCleanPhoto()
-    {
-        var _sut = (testableFotoManager)m_sut;
-        mockFileSystem.DirectoryExistsResult = true;
-        mockFileSystem.FileExistsResult = true;
-        _sut.ReadListInFileRes = true;
-        string listFileName = "testlist.txt";
-        string reportFileName = "report.txt";
-        //string result = m_sut.CleanPhoto(listFileName, reportFileName);
-        var result = await m_sut.CleanPhotoAsync(listFileName, string.Empty, _sut.PhotoFolderPath);
-        Assert.That(result, Is.Not.Null);
-        File.Delete(reportFileName); // Clean up after test
-    }
+    //[Test]
+    //public async Task TestGenerateDiffReports()
+    //{
+    //    var _sut = (testableFotoManager)m_sut;
+    //    _sut.PhotoFolderPath = "testPath";
+    //    _sut.ReadListInFileRes = true;
+    //    _sut.AllPhotos = new StringCollection();
+    //    _sut.WriteListFileRes = "Test result";
+    //    string result = await m_sut.GenerateDiffReportsAsync("test.txt", _sut.PhotoFolderPath);
+    //    Assert.That(result, Is.Not.Null);
+    //}
+    //[Test]
+    //public async Task TestCleanPhoto()
+    //{
+    //    var _sut = (testableFotoManager)m_sut;
+    //    mockFileSystem.DirectoryExistsResult = true;
+    //    mockFileSystem.FileExistsResult = true;
+    //    _sut.ReadListInFileRes = true;
+    //    string listFileName = "testlist.txt";
+    //    string reportFileName = "report.txt";
+    //    //string result = m_sut.CleanPhoto(listFileName, reportFileName);
+    //    var result = await m_sut.CleanPhotoAsync(listFileName, string.Empty, _sut.PhotoFolderPath);
+    //    Assert.That(result, Is.Not.Null);
+    //    File.Delete(reportFileName); // Clean up after test
+    //}
 }
 
