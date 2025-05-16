@@ -97,3 +97,22 @@ POST /api/PhotoManager/cleanPhotos
 2. 使用Visual Studio打开解决方案
 3. 运行项目
 4. 访问 https://localhost:5001/swagger 查看API文档
+
+## Running foto_manager with Docker
+
+You can build and run the `foto_manager` application as a container using the provided Dockerfile:
+
+### Build the Docker image
+
+```sh
+docker build -t foto_manager:latest .
+```
+
+### Run the Docker container
+
+```sh
+docker run --rm -p 8080:5001 foto_manager:latest
+```
+
+- The application will be available on port 8080 of your host (adjust the port mapping as needed).
+- You can pass environment variables or mount volumes as needed using standard Docker options.
