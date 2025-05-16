@@ -6,8 +6,8 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY foto_manager/ foto_manager/
-COPY foto_manager.csproj ./
-RUN dotnet restore ./foto_manager.csproj
+COPY foto_manager/foto_manager.csproj foto_manager/
+RUN dotnet restore foto_manager/foto_manager.csproj
 WORKDIR /src/foto_manager
 RUN dotnet publish -c Release -o /app/publish --no-restore
 
