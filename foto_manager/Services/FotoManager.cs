@@ -13,6 +13,26 @@ namespace foto_list.Services
             _fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
         }
 
+        // New implementation using StreamWriter instead of file path
+        public async Task<string> CreateListFileAsync(StreamWriter writer, string photoFolderPath)
+        {
+            if (string.IsNullOrEmpty(photoFolderPath) || !await _fileSystem.DirectoryExistsAsync(photoFolderPath))
+                return ConstDef.ConstErrFotoPath;
+
+            var fullPath = _fileSystem.GetFullPath(photoFolderPath);
+            StringCollection allFiles = new StringCollection();
+            await ListAllFilesAsync(allFiles, fullPath, "*.*", true);
+
+            // Write directly to the provided StreamWriter
+            foreach (var file in allFiles)
+            {
+                await writer.WriteLineAsync(file);
+            }
+            await writer.FlushAsync();
+
+            return "Success";
+        }
+
         public async Task<string> CreateListFileAsync(string listFileName, string photoFolderPath)
         {
             if (string.IsNullOrEmpty(photoFolderPath) || !await _fileSystem.DirectoryExistsAsync(photoFolderPath))
@@ -67,6 +87,52 @@ namespace foto_list.Services
 
             return result;
         }
+        
+        // New implementation using StreamWriters instead of file paths
+        public async Task<string> GenerateDiffReportsAsync(string listFilePath, string photoFolderPath, StreamWriter baselineWriter, StreamWriter targetWriter)
+        {
+            if (string.IsNullOrEmpty(photoFolderPath) || !await _fileSystem.DirectoryExistsAsync(photoFolderPath))
+                return ConstDef.ConstErrFotoPath;
+
+            var fullPath = _fileSystem.GetFullPath(photoFolderPath);
+            StringCollection allPhotosInBaseline = new StringCollection();
+
+            if (!await ReadListInFileAsync(listFilePath, allPhotosInBaseline))
+                return ConstDef.ConstErrFotolistFile;
+
+            StringCollection allFilesInTarget = new StringCollection();
+            await ListAllFilesAsync(allFilesInTarget, fullPath, "*.*", true);
+
+            StringCollection allMissingFileInTarget = new StringCollection();
+            StringCollection allMissingFileInBaseline = new StringCollection();
+
+            foreach (var name in allPhotosInBaseline)
+            {
+                if (!allFilesInTarget.Contains(name))
+                    allMissingFileInTarget.Add(name);
+            }
+
+            foreach (var name in allFilesInTarget)
+            {
+                if (!allPhotosInBaseline.Contains(name))
+                    allMissingFileInBaseline.Add(name);
+            }
+
+            // Write directly to the provided StreamWriters
+            foreach (var file in allMissingFileInBaseline)
+            {
+                await baselineWriter.WriteLineAsync(file);
+            }
+            await baselineWriter.FlushAsync();
+
+            foreach (var file in allMissingFileInTarget)
+            {
+                await targetWriter.WriteLineAsync(file);
+            }
+            await targetWriter.FlushAsync();
+
+            return "Success";
+        }
 
         public async Task<string> CleanPhotoAsync(string listFileName, string reportFileName, string photoFolderPath)
         {
@@ -85,6 +151,31 @@ namespace foto_list.Services
             var tempPath = Path.GetTempPath();
             var removedFileReport = _fileSystem.Combine(tempPath, reportFileName);
             return await WriteListFileAsync(removedFileReport, removedFiles);
+        }
+        
+        // New implementation using StreamWriter instead of file path
+        public async Task<string> CleanPhotoAsync(string listFilePath, StreamWriter writer, string photoFolderPath)
+        {
+            if (string.IsNullOrEmpty(photoFolderPath) || !await _fileSystem.DirectoryExistsAsync(photoFolderPath))
+                return ConstDef.ConstErrFotoPath;
+
+            var fullPath = _fileSystem.GetFullPath(photoFolderPath);
+            StringCollection allPhotos = new StringCollection();
+
+            if (!await ReadListInFileAsync(listFilePath, allPhotos))
+                return ConstDef.ConstErrFotolistFile;
+
+            StringCollection removedFiles = new StringCollection();
+            await CleanAllFilesAsync(allPhotos, removedFiles, fullPath, "*.*", true);
+
+            // Write directly to the provided StreamWriter
+            foreach (var file in removedFiles)
+            {
+                await writer.WriteLineAsync(file);
+            }
+            await writer.FlushAsync();
+
+            return "Success";
         }
 
         private async Task ListAllFilesAsync(StringCollection allFiles, string path, string pattern, bool recursive)

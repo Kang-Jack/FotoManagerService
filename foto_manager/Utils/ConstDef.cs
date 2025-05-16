@@ -10,6 +10,8 @@ public static class ConstDef
     public const string ConstParamHelp = "help";
     public const string ConstFotoPath = "photo folder path";
     public const string ConstErrFotoPath = "the input path need double check !";
+    public const string ConstInvalidFotoPath = "Invalid photo folder path";
+    public const string ConstInvalidListPath = "Invalid list file path";
     public const string ConstErrFotolistFile = "photo list file need double check !";
     public const string ConstTempRemoveFolderName = "removed";
     public const string ConstErrWriteFile = "Faild to write list file: ";
