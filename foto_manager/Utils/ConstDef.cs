@@ -28,9 +28,16 @@ public static class ConstDef
 }
 public class DiffReportDTO
 {
-    public string TotalBaselinePhotoNum { get; set; }
-    public string TotalTargetFolderPhotoNum { get; set; }
-    public StringCollection DelPhotos { get; set; }
-    public StringCollection SubFolderNames { get; set; }
+    public string TotalBaselinePhotoNum { get; set; } = "0";
+    public string TotalTargetFolderPhotoNum { get; set; } = "0";
+    public StringCollection DelPhotos { get; set; } = [];
+    public StringCollection SubFolderNames { get; set; } = [];
+    
+    public DiffReportDTO()
+    {
+        // Constructor initializes properties with default values
+        // TotalBaselinePhotoNum and TotalTargetFolderPhotoNum default to "0"
+        // DelPhotos and SubFolderNames default to empty StringCollection
+    }
 }
 
