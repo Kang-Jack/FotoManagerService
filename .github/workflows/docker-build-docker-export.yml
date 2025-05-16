@@ -1,0 +1,19 @@
+name: Docker Build and Export
+
+on:
+  workflow_dispatch:
+
+jobs:
+  docker-build-export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t foto_manager:latest .
+      - name: Save Docker image as tar
+        run: docker save -o foto_manager.tar foto_manager:latest
+      - name: Upload Docker image tar
+        uses: actions/upload-artifact@v4
+        with:
+          name: foto_manager-docker-tar
+          path: foto_manager.tar
