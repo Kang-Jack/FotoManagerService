@@ -1,6 +1,71 @@
-# 照片管理Web服务
+# 照片管理服务 (Photo Manager Service)
 
-这是一个用于管理照片的Web API服务，基于.NET 8构建。该服务提供照片列表创建、差异比较和清理功能。
+## 项目概述
+
+照片管理服务是一个用于管理照片文件的WebAPI应用程序，提供照片列表创建、比较和清理功能。现在支持两种实现方式：
+
+1. 基于文件系统的实现（默认）
+2. 基于MySQL数据库的实现（新增）
+
+## MySQL实现说明
+
+### 数据库结构
+
+```sql
+CREATE TABLE photos (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    device_name VARCHAR(100) NOT NULL,
+    album_name VARCHAR(100) NOT NULL,
+    file_name VARCHAR(100) NOT NULL,
+    file_extension VARCHAR(100) NOT NULL,
+    file_status VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+### 技术实现
+
+- 使用Entity Framework Core进行数据库操作
+- 采用仓储模式分离数据访问逻辑
+- 支持与原有文件系统实现共存，可通过配置切换
+
+## 如何使用MySQL实现
+
+### 配置数据库连接
+
+在`appsettings.json`文件中配置MySQL数据库连接字符串：
+
+```json
+{
+  "ConnectionStrings": {
+    "MySqlConnection": "server=localhost;port=3306;database=photomanager;user=photoman;password=photoman"
+  },
+  "UseMySql": true
+}
+```
+
+将`UseMySql`设置为`true`即可启用MySQL实现。
+
+### API端点
+
+#### 原有API端点（同时支持文件系统和MySQL实现）
+
+- `POST /api/PhotoManager/CreateList` - 创建照片列表
+- `POST /api/PhotoManager/GenerateDiffReport` - 生成差异报告
+- `POST /api/PhotoManager/CleanPhoto` - 清理照片
+
+#### MySQL专用API端点
+
+- `GET /api/PhotoMySql` - 获取所有照片
+- `GET /api/PhotoMySql/{id}` - 根据ID获取照片
+- `GET /api/PhotoMySql/device/{deviceName}` - 根据设备名称获取照片
+- `GET /api/PhotoMySql/album/{albumName}` - 根据相册名称获取照片
+- `GET /api/PhotoMySql/status/{fileStatus}` - 根据文件状态获取照片
+- `POST /api/PhotoMySql` - 添加照片
+- `POST /api/PhotoMySql/batch` - 批量添加照片
+- `PUT /api/PhotoMySql/{id}` - 更新照片
+- `DELETE /api/PhotoMySql/{id}` - 删除照片
 
 ## API端点
 
@@ -90,6 +155,11 @@ POST /api/PhotoManager/cleanPhotos
 
 - .NET 8.0 SDK
 - Visual Studio 2022或其他支持.NET 8的IDE
+
+### 前提条件
+
+- .NET 8.0 SDK
+- MySQL 8.0或更高版本（如果使用MySQL实现）
 
 ## 启动服务
 
